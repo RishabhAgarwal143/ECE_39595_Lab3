@@ -15,7 +15,7 @@ namespace Student
     int piece_row;
     int piece_column;
     Color piece_color;
-    ChessBoard piece_board;
+    ChessBoard& piece_board;
 
   public:
     /**
