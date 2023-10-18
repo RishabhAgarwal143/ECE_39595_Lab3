@@ -3,12 +3,20 @@
 
 #include "Chess.h"
 
-    namespace Student
+namespace Student
 {
   class ChessBoard;
 
   class ChessPiece
   {
+
+  protected:
+    Type piece_type;
+    int piece_row;
+    int piece_column;
+    Color piece_color;
+    ChessBoard piece_board;
+
   public:
     /**
      * @brief
@@ -34,7 +42,7 @@
      * @return
      * Colour of piece.
      */
-    Color getColor();
+    Color getColor() { return piece_color; };
 
     /**
      * @return
@@ -44,19 +52,19 @@
      * would have been to define this function as pure virtual and
      * let each derived class override this function.
      */
-    Type getType();
+    Type getType() { return piece_type; };
 
     /**
      * @return
      * Current row number of piece.
      */
-    int getRow();
+    int getRow() { return piece_row; };
 
     /**
      * @return
      * Current column number of piece.
      */
-    int getColumn();
+    int getColumn() { return piece_color; };
 
     /**
      * @brief Sets row and column numbers of piece.

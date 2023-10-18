@@ -11,6 +11,16 @@ namespace Student
 {
     class PawnPiece : public ChessPiece
     {
+    public:
+        PawnPiece(ChessBoard &board, Color color, int row, int column);
+
+        ~PawnPiece(){};
+
+        void setPosition(int row, int column);
+
+        bool canMoveToLocation(int toRow, int toColumn);
+
+        const char *toString();
     };
 }
 
