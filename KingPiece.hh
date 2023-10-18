@@ -11,7 +11,7 @@ namespace Student
 {
     class KingPiece : public ChessPiece
     {
-
+    public:
         KingPiece(ChessBoard &board, Color color, int row, int column);
 
         ~KingPiece(){};

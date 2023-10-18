@@ -33,16 +33,19 @@ void ChessBoard::createChessPiece(Color col, Type ty, int startRow, int startCol
         ChessPiece* current_piece = new PawnPiece(*this, col, startRow, startColumn);
         board.at(startRow).at(startColumn) = current_piece;
     }
-    // else if (ty == Rook)
-    // {
-    //     current_piece = new RookPiece(*this,col,startRow,startColumn);
-    // }
-    // else if(ty == Bishop){
-    //     current_piece = new BishopPiece(*this,col,startRow,startColumn);
-    // }
-    // else{
-    //     current_piece = new KingPiece(*this,col,startRow,startColumn);
-    // }
+    else if (ty == Rook)
+    {
+        ChessPiece* current_piece = new RookPiece(*this, col, startRow, startColumn);
+        board.at(startRow).at(startColumn) = current_piece;
+    }
+    else if(ty == Bishop){
+        ChessPiece* current_piece = new BishopPiece(*this, col, startRow, startColumn);
+        board.at(startRow).at(startColumn) = current_piece;
+    }
+    else{
+        ChessPiece* current_piece = new KingPiece(*this, col, startRow, startColumn);
+        board.at(startRow).at(startColumn) = current_piece;
+    }
 
 
 }
