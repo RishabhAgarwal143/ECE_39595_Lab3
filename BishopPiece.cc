@@ -22,13 +22,59 @@ namespace Student
         // check if there is a piece in the way
         // check if there is a piece in the destination
         // check if the destination is in the board
-        // check if the destination is the same as the current position
 
-        if (this->piece_row == toRow && this->piece_column == toColumn)
+        if (toRow == this->piece_row && toColumn == this->piece_column)
         {
             return false;
         }
 
+        if (toRow < 0 || (toRow > this->piece_board->getNumRows() - 1) || toColumn < 0 || toColumn > this->piece_board->getNumCols() - 1)
+        {
+            return false;
+        }
+
+        int curRow = this->piece_row;
+        int curColumn = this->piece_column;
+
+        // check if bishop is moving along a diagonal
+        if (abs(toRow - this->piece_row) == abs(toColumn - this->piece_column))
+        {
+            while(curRow != toRow || curColumn != toColumn)
+            {
+                if (curRow < toRow)
+                {
+                    curRow++;
+                }
+                else
+                {
+                    curRow--;
+                }
+
+                if (curColumn < toColumn)
+                {
+                    curColumn++;
+                }
+                else
+                {
+                    curColumn--;
+                }
+
+                if (this->piece_board->getPiece(curRow, curColumn) != nullptr)
+                {
+                    return false;
+                }
+            }
+
+            if (this->piece_board->getPiece(toRow, toColumn) != nullptr)
+            {
+                if (this->piece_board->getPiece(toRow, toColumn)->getColor() == this->piece_color)
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
         
        
         return false;
