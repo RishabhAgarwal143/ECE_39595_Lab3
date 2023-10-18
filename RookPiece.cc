@@ -18,7 +18,49 @@ namespace Student
 
     bool RookPiece::canMoveToLocation(int toRow, int toColumn)
     {
-       
+        if (toRow == this->piece_row && toColumn == this->piece_column)
+        {
+            return false;
+        }
+
+        int curRow = this->piece_row;
+        int curColumn = this->piece_column;
+
+        // check if rook is moving along a row or column
+        if (toRow == this->piece_row || toColumn == this->piece_column)
+        {
+            while(curRow != toRow || curColumn != toColumn)
+            {
+                if (curRow != toRow)
+                {
+                    if (curRow < toRow)
+                    {
+                        curRow++;
+                    }
+                    else
+                    {
+                        curRow--;
+                    }
+                }
+                else
+                {
+                    if (curColumn < toColumn)
+                    {
+                        curColumn++;
+                    }
+                    else
+                    {
+                        curColumn--;
+                    }
+                }
+
+                if (this->piece_board->getPiece(curRow, curColumn) != nullptr)
+                {
+                    return false;
+                }
+            }
+                        
+        }
         return false;
     }
 

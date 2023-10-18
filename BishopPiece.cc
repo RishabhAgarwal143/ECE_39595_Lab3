@@ -18,6 +18,18 @@ namespace Student
 
     bool BishopPiece::canMoveToLocation(int toRow, int toColumn)
     {
+        // check which quadrant the bishop is moving to
+        // check if there is a piece in the way
+        // check if there is a piece in the destination
+        // check if the destination is in the board
+        // check if the destination is the same as the current position
+
+        if (this->piece_row == toRow && this->piece_column == toColumn)
+        {
+            return false;
+        }
+
+        
        
         return false;
     }
