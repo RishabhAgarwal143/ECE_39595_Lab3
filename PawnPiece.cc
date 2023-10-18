@@ -1,6 +1,5 @@
 #include "PawnPiece.hh"
 #include "ChessBoard.hh"
-#include <iostream>
 using Student::ChessBoard;
 namespace Student
 {
@@ -25,13 +24,14 @@ namespace Student
             capture = true;
         }
 
+
         if (this->piece_color == White)
         {
             if (!capture) 
             {
                 if (toColumn == this->piece_column)
                 {
-                    if (this->piece_row - toRow == 2 && (this->piece_row == this->piece_board->getNumRows() - 2))
+                    if (this->piece_row - toRow == 2 && (this->piece_row == this->piece_board->getNumRows() - 2) && (this->piece_board->getPiece(this->piece_row - 1, this->piece_column) == nullptr))
                     {
                         return true;
                     }
@@ -58,7 +58,7 @@ namespace Student
             {
                 if (toColumn == this->piece_column)
                 {
-                    if (toRow - this->piece_row == 2 && (this->piece_row == 1))
+                    if (toRow - this->piece_row == 2 && (this->piece_row == 1) && (this->piece_board->getPiece(this->piece_row + 1, this->piece_column) == nullptr))
                     {
                         return true;
                     }
