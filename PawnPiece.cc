@@ -16,31 +16,67 @@ namespace Student
 
     bool PawnPiece::canMoveToLocation(int toRow, int toColumn)
     {
-        if (this->piece_board->getPiece(toRow, toColumn) != nullptr && this->piece_column == toColumn)
+        // check if normal move or capture
+        bool capture = false;
+        // check if piece is there in pos
+        if (this->piece_board->getPiece(toRow, toColumn) != nullptr)
         {
-            return false;
+            capture = true;
         }
+
+
         if (this->piece_color == White)
         {
-            if (toColumn == this->piece_column)
+            if (!capture) 
             {
-                if (this->piece_row - toRow == 2 && (this->piece_row == this->piece_board->getNumRows() - 2))
+                if (toColumn == this->piece_column)
                 {
-                    // check if piece in n - 2
+                    if (this->piece_row - toRow == 2 && (this->piece_row == this->piece_board->getNumRows() - 2))
+                    {
+                        return true;
+                    }
+                    else if (this->piece_row - toRow == 1 && toRow <= 0)
+                    {
+                        return true;
+                    }
                 }
-                else if (this->piece_row - toRow == 1)
+            } 
+            else 
+            {
+                if (toColumn == this->piece_column + 1 || toColumn == this->piece_column - 1)
                 {
-                    // check if piece
+                    if (this->piece_row - toRow == 1 && toRow <= 0)
+                    {
+                        return true;
+                    }
                 }
-
-                // check if piece is there in pos - false else return true
             }
         }
         else
         {
-            if (toColumn == this->piece_column)
+            if (!capture) 
             {
-                // if piecerow - toRow
+                if (toColumn == this->piece_column)
+                {
+                    if (toRow - this->piece_row == 2 && (this->piece_row == 1))
+                    {
+                        return true;
+                    }
+                    else if (toRow - this->piece_row == 1 && toRow >= this->piece_board->getNumRows() - 1)
+                    {
+                        return true;
+                    }
+                }
+            }
+            else 
+            {
+                if (toColumn == this->piece_column + 1 || toColumn == this->piece_column - 1)
+                {
+                    if (toRow - this->piece_row == 1 && toRow >= this->piece_board->getNumRows() - 1)
+                    {
+                        return true;
+                    }
+                }
             }
         }
 
