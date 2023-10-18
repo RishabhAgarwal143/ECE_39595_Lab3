@@ -4,7 +4,7 @@
 // #include "RookPiece.hh"
 // #include "BishopPiece.hh"
 // #include "KingPiece.hh"
-
+    
 using Student::ChessBoard;
 namespace Student
 {

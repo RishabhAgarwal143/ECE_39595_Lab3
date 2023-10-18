@@ -18,7 +18,10 @@ void test_part1_4x4_1()
 
     // Corresponding code
     Student::ChessBoard sBoard(4, 4);
-    sBoard.createChessPiece(White, Pawn, 3, 2);
+    sBoard.createChessPiece(White, Pawn, 2, 2);
+    sBoard.createChessPiece(Black, Pawn, 1, 2);
+    
+    std::cout << "Hey " << sBoard.isValidMove(2,2,0,2) << std::endl;;
     std::cout << sBoard.displayBoard().str() << std::endl;
     // sBoard.createChessPiece(White, Rook, 3, 2);
     // sBoard.createChessPiece(Black, Bishop, 1, 3);
