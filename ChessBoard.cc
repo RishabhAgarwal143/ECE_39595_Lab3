@@ -8,15 +8,16 @@ using Student::ChessBoard;
 
 ChessBoard::ChessBoard(int numRow, int numCol)
 {
-    this->numCols = numCol;
-    this->numRows = numRow;
-    for (int i = 0; i < numRow; i++)
-    {
-        for (int j = 0; j < numRow; j++)
-        {
-            this->board.at(i).at(j) = nullptr;
-        }
-    }
+    // this->numCols = numCol;
+    // this->numRows = numRow;
+    // for (int i = 0; i < numRow; i++)
+    // {
+    //     for (int j = 0; j < numRow; j++)
+    //     {
+    //         ChessPiece* ptr = nullptr;
+    //         this->board.at(i).at(j) = ptr;
+    //     }
+    // }
 }
 
 void ChessBoard::createChessPiece(Color col, Type ty, int startRow, int startColumn)
@@ -84,6 +85,8 @@ bool ChessBoard::isValidMove(int fromRow, int fromColumn, int toRow, int toColum
             return false;
         }
     }
+
+    return true;
 }
 
 // This function is only needed for Part 2 and Part 3.
