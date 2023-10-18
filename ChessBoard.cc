@@ -3,29 +3,35 @@
 #include "RookPiece.hh"
 #include "BishopPiece.hh"
 #include "KingPiece.hh"
-
+#include <iostream>
 using Student::ChessBoard;
 
 ChessBoard::ChessBoard(int numRow, int numCol)
 {
-    // this->numCols = numCol;
-    // this->numRows = numRow;
-    // for (int i = 0; i < numRow; i++)
-    // {
-    //     for (int j = 0; j < numRow; j++)
-    //     {
-    //         ChessPiece* ptr = nullptr;
-    //         this->board.at(i).at(j) = ptr;
-    //     }
-    // }
+    this->numCols = numCol;
+    this->numRows = numRow;
+    for (int i = 0; i < numRow; i++)
+    {
+        std::vector<ChessPiece*> x;
+        for (int j = 0; j < numCol; j++)
+        { 
+            x.push_back(nullptr);
+        }
+        this->board.push_back(x);
+    }
 }
 
 void ChessBoard::createChessPiece(Color col, Type ty, int startRow, int startColumn)
 {
-    ChessPiece *current_piece = nullptr;
+    if (board.at(startRow).at(startColumn) != nullptr)
+    {
+        ChessPiece *x = board.at(startRow).at(startColumn);
+        delete x;
+    }
     if (ty == Pawn)
     {
-        current_piece = new PawnPiece(*this, col, startRow, startColumn);
+        ChessPiece* current_piece = new PawnPiece(*this, col, startRow, startColumn);
+        board.at(startRow).at(startColumn) = current_piece;
     }
     // else if (ty == Rook)
     // {
@@ -38,13 +44,7 @@ void ChessBoard::createChessPiece(Color col, Type ty, int startRow, int startCol
     //     current_piece = new KingPiece(*this,col,startRow,startColumn);
     // }
 
-    if (board.at(startRow).at(startColumn) != nullptr)
-    {
-        ChessPiece *x = board.at(startRow).at(startColumn);
-        delete x;
-    }
 
-    board.at(startRow).at(startColumn) = current_piece;
 }
 
 // This function is only needed for Part 2 and Part 3.
@@ -97,6 +97,8 @@ bool ChessBoard::isPieceUnderThreat(int row, int column)
 
 std::ostringstream ChessBoard::displayBoard()
 {
+
+    
     std::ostringstream outputString;
     // top scale
     outputString << "  ";

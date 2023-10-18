@@ -1,6 +1,6 @@
 #include "PawnPiece.hh"
 #include "ChessBoard.hh"
-
+using Student::ChessBoard;
 namespace Student
 {
     PawnPiece::PawnPiece(ChessBoard &board, Color color, int row, int column) : ChessPiece(board, color, row, column)
