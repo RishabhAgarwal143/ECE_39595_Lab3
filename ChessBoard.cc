@@ -74,11 +74,11 @@ bool ChessBoard::isValidMove(int fromRow, int fromColumn, int toRow, int toColum
         return false;
     }
     ChessPiece *current_piece = board.at(fromRow).at(fromColumn);
-    if (current_piece->getColor() != this->turn)
-    {
-        std::cout << "is not valid 4" << std::endl;
-        return false;
-    }
+    // if (current_piece->getColor() != this->turn)
+    // {
+    //     std::cout << "is not valid 4" << std::endl;
+    //     return false;
+    // }
 
     if (!current_piece->canMoveToLocation(toRow, toColumn))
     {

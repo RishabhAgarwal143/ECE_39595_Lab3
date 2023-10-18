@@ -21,9 +21,11 @@ void test_part1_4x4_1()
     sBoard.createChessPiece(White, Pawn, 2, 2);
     sBoard.createChessPiece(Black, Pawn, 1, 1);
     
-    std::cout << "Hey " << sBoard.isValidMove(2,2,1,1) << std::endl;;
+    std::cout << "Hey " << sBoard.isValidMove(1, 1, 2, 2) << std::endl;;
     std::cout << sBoard.displayBoard().str() << std::endl;
-    // sBoard.createChessPiece(White, Rook, 3, 2);
+
+
+    // sBoard.createChessPiece(White, Rook, 3, 2);s
     // sBoard.createChessPiece(Black, Bishop, 1, 3);
     // sBoard.createChessPiece(Black, Rook, 1, 1);
     // sBoard.createChessPiece(White, Rook, 2, 3);

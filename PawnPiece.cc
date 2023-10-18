@@ -1,5 +1,7 @@
 #include "PawnPiece.hh"
 #include "ChessBoard.hh"
+#include <iostream>
+
 using Student::ChessBoard;
 namespace Student
 {
@@ -35,7 +37,7 @@ namespace Student
                     {
                         return true;
                     }
-                    else if (this->piece_row - toRow == 1 && toRow <= 0)
+                    else if (this->piece_row - toRow == 1 && toRow >= 0)
                     {
                         return true;
                     }
@@ -45,8 +47,10 @@ namespace Student
             {
                 if (toColumn == this->piece_column + 1 || toColumn == this->piece_column - 1)
                 {
-                    if (this->piece_row - toRow == 1 && toRow <= 0)
+
+                    if (this->piece_row - toRow == 1 && toRow >= 0)
                     {
+                    
                         return true;
                     }
                 }
@@ -62,7 +66,7 @@ namespace Student
                     {
                         return true;
                     }
-                    else if (toRow - this->piece_row == 1 && toRow >= this->piece_board->getNumRows() - 1)
+                    else if (toRow - this->piece_row == 1 && toRow <= this->piece_board->getNumRows() - 1)
                     {
                         return true;
                     }
@@ -72,7 +76,7 @@ namespace Student
             {
                 if (toColumn == this->piece_column + 1 || toColumn == this->piece_column - 1)
                 {
-                    if (toRow - this->piece_row == 1 && toRow >= this->piece_board->getNumRows() - 1)
+                    if (toRow - this->piece_row == 1 && toRow <= this->piece_board->getNumRows() - 1)
                     {
                         return true;
                     }
