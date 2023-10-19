@@ -64,7 +64,7 @@ namespace Student
      * @return
      * Current column number of piece.
      */
-    int getColumn() { return piece_color; };
+    int getColumn() { return piece_column; };
 
     /**
      * @brief Sets row and column numbers of piece.

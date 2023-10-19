@@ -24,7 +24,13 @@ namespace Student
         if (this->piece_board->getPiece(toRow, toColumn) != nullptr)
         {
             capture = true;
+            if (this->piece_color == (this->piece_board->getPiece(toRow, toColumn)->getColor()))
+            {
+                return false;
+            }
+            std::cout << "CAPTURE\n ";
         }
+
 
 
         if (this->piece_color == White)

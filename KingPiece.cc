@@ -18,7 +18,6 @@ namespace Student
 
     bool KingPiece::canMoveToLocation(int toRow, int toColumn)
     {
-       
         return false;
     }
 

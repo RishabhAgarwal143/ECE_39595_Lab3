@@ -3,19 +3,37 @@
 #include "RookPiece.hh"
 #include "BishopPiece.hh"
 #include "KingPiece.hh"
-#include <iostream>
+// #include <iostream>
 using Student::ChessBoard;
 
 ChessBoard::ChessBoard(int numRow, int numCol)
 {
     this->numCols = numCol;
     this->numRows = numRow;
-    for (int i = 0; i < numRow; i++)
+    // for (int i = 0; i < numRow; i++)
+    // {
+    //     std::vector<ChessPiece*> x;
+    //     for (int j = 0; j < numCol; j++)
+    //     { 
+    //         x.push_back(nullptr);
+    //     }
+    //     this->board.push_back(x);
+    // }
+    this->board.resize(numRow);
+    for(int i = 0; i < numRow;i++){
+        this->board[i].resize(numCol,nullptr);
+    }
+}
+
+ChessBoard::~ChessBoard(){
+    for (int i = 0; i < this->numRows; i++)
     {
         std::vector<ChessPiece*> x;
-        for (int j = 0; j < numCol; j++)
+        for (int j = 0; j < this->numCols; j++)
         { 
-            x.push_back(nullptr);
+            if(this->board.at(i).at(j) != nullptr){
+                delete this->board.at(i).at(j);
+            }
         }
         this->board.push_back(x);
     }
@@ -25,8 +43,8 @@ void ChessBoard::createChessPiece(Color col, Type ty, int startRow, int startCol
 {
     if (board.at(startRow).at(startColumn) != nullptr)
     {
-        ChessPiece *x = board.at(startRow).at(startColumn);
-        delete x;
+        delete board.at(startRow).at(startColumn);
+        board.at(startRow).at(startColumn) = nullptr;
     }
     if (ty == Pawn)
     {
@@ -47,7 +65,7 @@ void ChessBoard::createChessPiece(Color col, Type ty, int startRow, int startCol
         board.at(startRow).at(startColumn) = current_piece;
     }
 
-
+    return;
 }
 
 // This function is only needed for Part 2 and Part 3.
@@ -60,19 +78,19 @@ bool ChessBoard::isValidMove(int fromRow, int fromColumn, int toRow, int toColum
 {
     if (toRow > this->numRows || toColumn > this->numCols)
     {
-        std::cout << "is not valid 1" << std::endl;
+        // std::cout << "is not valid 1" << std::endl;
 
         return false;
     }
     if (fromRow == toRow && fromColumn == toColumn)
     {
-        std::cout << "is not valid 2" << std::endl;
+        // std::cout << "is not valid 2" << std::endl;
 
         return false;
     }
     if (board.at(fromRow).at(fromColumn) == nullptr)
     {
-        std::cout << "is not valid 3" << std::endl;
+        // std::cout << "is not valid 3" << std::endl;
 
         return false;
     }
@@ -85,7 +103,7 @@ bool ChessBoard::isValidMove(int fromRow, int fromColumn, int toRow, int toColum
 
     if (!current_piece->canMoveToLocation(toRow, toColumn))
     {
-        std::cout << "Piece valid" << std::endl;
+        // std::cout << "Piece valid" << std::endl;
 
         return false;
     }
@@ -94,7 +112,7 @@ bool ChessBoard::isValidMove(int fromRow, int fromColumn, int toRow, int toColum
     {
         if (board.at(toRow).at(toColumn)->getColor() == current_piece->getColor())
         {
-            std::cout << "is not valid 5" << std::endl;
+            // std::cout << "is not valid 5" << std::endl;
 
             return false;
         }

@@ -19,7 +19,11 @@ namespace Student
     bool RookPiece::canMoveToLocation(int toRow, int toColumn)
     {
         if (toRow == this->piece_row && toColumn == this->piece_column)
-        {
+        { 
+            return false;
+        }
+
+        if (toRow != this->piece_row && toColumn != this->piece_column) {
             return false;
         }
 
@@ -27,41 +31,53 @@ namespace Student
         int curColumn = this->piece_column;
 
         // check if rook is moving along a row or column
-        if (toRow == this->piece_row || toColumn == this->piece_column)
+        if (toRow != curRow && toColumn == curColumn)
         {
-            while(curRow != toRow || curColumn != toColumn)
+            while(toRow != curRow)
             {
-                if (curRow != toRow)
+                if (curRow < toRow)
                 {
-                    if (curRow < toRow)
-                    {
-                        curRow++;
-                    }
-                    else
-                    {
-                        curRow--;
-                    }
+                    curRow++;
                 }
                 else
                 {
-                    if (curColumn < toColumn)
-                    {
-                        curColumn++;
-                    }
-                    else
-                    {
-                        curColumn--;
-                    }
+                    curRow--;
                 }
 
                 if (this->piece_board->getPiece(curRow, curColumn) != nullptr)
                 {
+                    if (curRow == toRow && this->piece_color != this->piece_board->getPiece(curRow, curColumn)->getColor()) {
+                        return true;
+                    }
                     return false;
                 }
             }
                         
         }
-        return false;
+        else if (toRow == curRow && toColumn != curColumn)
+        {
+            while(toColumn != curColumn)
+            {
+                if (curColumn < toColumn)
+                {
+                    curColumn++;
+                }
+                else
+                {
+                    curColumn--;
+                }
+
+                if (this->piece_board->getPiece(curRow, curColumn) != nullptr)
+                {
+                    if (curColumn == toColumn && this->piece_color != this->piece_board->getPiece(curRow, curColumn)->getColor()) {
+                        return true;
+                    }
+                    return false;
+                }
+            }
+                        
+        }
+        return true;
     }
 
     const char *RookPiece::toString()

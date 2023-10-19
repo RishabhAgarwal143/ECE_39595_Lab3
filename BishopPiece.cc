@@ -18,11 +18,6 @@ namespace Student
 
     bool BishopPiece::canMoveToLocation(int toRow, int toColumn)
     {
-        // check which quadrant the bishop is moving to
-        // check if there is a piece in the way
-        // check if there is a piece in the destination
-        // check if the destination is in the board
-
         if (toRow == this->piece_row && toColumn == this->piece_column)
         {
             return false;
@@ -36,8 +31,7 @@ namespace Student
         int curRow = this->piece_row;
         int curColumn = this->piece_column;
 
-        // check if bishop is moving along a diagonal
-        if (abs(toRow - this->piece_row) == abs(toColumn - this->piece_column))
+        if (abs(toRow - curRow) == abs(toColumn - curColumn))
         {
             while(curRow != toRow || curColumn != toColumn)
             {
@@ -61,6 +55,9 @@ namespace Student
 
                 if (this->piece_board->getPiece(curRow, curColumn) != nullptr)
                 {
+                    if (curColumn == toColumn && this->piece_color != this->piece_board->getPiece(curRow, curColumn)->getColor()) {
+                        return true;
+                    }
                     return false;
                 }
             }
@@ -75,7 +72,6 @@ namespace Student
 
             return true;
         }
-        
        
         return false;
     }
