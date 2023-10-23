@@ -90,7 +90,7 @@ bool ChessBoard::movePiece(int fromRow, int fromColumn, int toRow, int toColumn)
         {
             this->turn = White;
         }
-        
+
         return true;
     }
     return false;
@@ -146,6 +146,20 @@ bool ChessBoard::isValidMove(int fromRow, int fromColumn, int toRow, int toColum
 // This function is only needed for Part 2 and Part 3.
 bool ChessBoard::isPieceUnderThreat(int row, int column)
 {
+    for (auto irow : board)
+    {
+        for (auto square : irow)
+        {
+            if (square != nullptr && square->getColor() != this->turn)
+            {
+                if (square->canMoveToLocation(row, column))
+                {
+                    return true;
+                }
+            }
+        }
+    }
+
     return false;
 }
 
