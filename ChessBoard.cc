@@ -73,10 +73,14 @@ bool ChessBoard::movePiece(int fromRow, int fromColumn, int toRow, int toColumn)
 {
     if (isValidMove(fromRow, fromColumn, toRow, toColumn))
     {
-        ChessPiece *current_piece = board.at(fromRow).at(fromColumn);
+        ChessPiece *piece = board.at(fromRow).at(fromColumn);
+        if (board.at(toRow).at(toColumn) != nullptr)
+        {
+            delete board.at(toRow).at(toColumn);
+        }
+        board.at(toRow).at(toColumn) = piece;
         board.at(fromRow).at(fromColumn) = nullptr;
-        board.at(toRow).at(toColumn) = current_piece;
-        current_piece->setPosition(toRow, toColumn);
+        piece->setPosition(toRow, toColumn);
         return true;
     }
     return false;
