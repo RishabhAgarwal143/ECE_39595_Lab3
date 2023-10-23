@@ -74,6 +74,7 @@ bool ChessBoard::movePiece(int fromRow, int fromColumn, int toRow, int toColumn)
     if (isValidMove(fromRow, fromColumn, toRow, toColumn))
     {
         ChessPiece *piece = board.at(fromRow).at(fromColumn);
+
         if (board.at(toRow).at(toColumn) != nullptr)
         {
             delete board.at(toRow).at(toColumn);
@@ -81,6 +82,15 @@ bool ChessBoard::movePiece(int fromRow, int fromColumn, int toRow, int toColumn)
         board.at(toRow).at(toColumn) = piece;
         board.at(fromRow).at(fromColumn) = nullptr;
         piece->setPosition(toRow, toColumn);
+        if (this->turn == White)
+        {
+            this->turn = Black;
+        }
+        else
+        {
+            this->turn = White;
+        }
+        
         return true;
     }
     return false;
