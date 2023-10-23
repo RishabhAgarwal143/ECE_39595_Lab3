@@ -71,6 +71,14 @@ void ChessBoard::createChessPiece(Color col, Type ty, int startRow, int startCol
 // This function is only needed for Part 2 and Part 3.
 bool ChessBoard::movePiece(int fromRow, int fromColumn, int toRow, int toColumn)
 {
+    if (isValidMove(fromRow, fromColumn, toRow, toColumn))
+    {
+        ChessPiece *current_piece = board.at(fromRow).at(fromColumn);
+        board.at(fromRow).at(fromColumn) = nullptr;
+        board.at(toRow).at(toColumn) = current_piece;
+        current_piece->setPosition(toRow, toColumn);
+        return true;
+    }
     return false;
 }
 
