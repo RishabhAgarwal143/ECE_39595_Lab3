@@ -71,6 +71,7 @@ void ChessBoard::createChessPiece(Color col, Type ty, int startRow, int startCol
 // This function is only needed for Part 2 and Part 3.
 bool ChessBoard::movePiece(int fromRow, int fromColumn, int toRow, int toColumn)
 {
+
     if (isValidMove(fromRow, fromColumn, toRow, toColumn))
     {
         ChessPiece *piece = board.at(fromRow).at(fromColumn);
@@ -82,6 +83,7 @@ bool ChessBoard::movePiece(int fromRow, int fromColumn, int toRow, int toColumn)
         board.at(toRow).at(toColumn) = piece;
         board.at(fromRow).at(fromColumn) = nullptr;
         piece->setPosition(toRow, toColumn);
+        
         if (this->turn == White)
         {
             this->turn = Black;
@@ -93,6 +95,7 @@ bool ChessBoard::movePiece(int fromRow, int fromColumn, int toRow, int toColumn)
 
         return true;
     }
+
     return false;
 }
 
@@ -117,11 +120,10 @@ bool ChessBoard::isValidMove(int fromRow, int fromColumn, int toRow, int toColum
         return false;
     }
     ChessPiece *current_piece = board.at(fromRow).at(fromColumn);
-    // if (current_piece->getColor() != this->turn)
-    // {
-    //     std::cout << "is not valid 4" << std::endl;
-    //     return false;
-    // }
+    if (current_piece->getColor() != this->turn)
+    {
+        return false;
+    }
 
     if (!current_piece->canMoveToLocation(toRow, toColumn))
     {
@@ -146,12 +148,17 @@ bool ChessBoard::isValidMove(int fromRow, int fromColumn, int toRow, int toColum
 // This function is only needed for Part 2 and Part 3.
 bool ChessBoard::isPieceUnderThreat(int row, int column)
 {
+    if (this->board.at(row).at(column) == nullptr)
+    {
+        return false;
+    }
     for (auto irow : board)
     {
         for (auto square : irow)
         {
-            if (square != nullptr && square->getColor() != this->turn)
+            if (square != nullptr && square->getColor() != this->board.at(row).at(column)->getColor())
             {
+
                 if (square->canMoveToLocation(row, column))
                 {
                     return true;
@@ -169,15 +176,16 @@ std::ostringstream ChessBoard::displayBoard()
     
     std::ostringstream outputString;
     // top scale
-    outputString << "  ";
+    outputString << "   ";
     for (int i = 0; i < numCols; i++)
     {
         outputString << i;
+        outputString << " ";
     }
     outputString << std::endl
-                 << "  ";
+                 << "   ";
     // top border
-    for (int i = 0; i < numCols; i++)
+    for (int i = 0; i < 2*numCols; i++)
     {
         outputString << "-";
     }
@@ -185,18 +193,21 @@ std::ostringstream ChessBoard::displayBoard()
 
     for (int row = 0; row < numRows; row++)
     {
-        outputString << row << "|";
+        outputString << row << " |";
         for (int column = 0; column < numCols; column++)
         {
             ChessPiece *piece = board.at(row).at(column);
+            
             outputString << (piece == nullptr ? " " : piece->toString());
+            outputString << (piece == nullptr ? " " :" ");
+
         }
-        outputString << "|" << std::endl;
+        outputString << " |" << std::endl;
     }
 
     // bottom border
-    outputString << "  ";
-    for (int i = 0; i < numCols; i++)
+    outputString << "   ";
+    for (int i = 0; i < 2*numCols; i++)
     {
         outputString << "-";
     }

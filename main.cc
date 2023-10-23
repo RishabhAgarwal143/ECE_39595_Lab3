@@ -54,6 +54,11 @@ void test_part1_4x4_1()
 
     cout << sBoard.displayBoard().str() << endl;
 
+    // sBoard.movePiece(1,3,0,2);
+    cout << sBoard.isPieceUnderThreat(0,2) << endl;
+    cout << sBoard.displayBoard().str() << endl;
+
+
     // Calls isValidMove() from every position to every
     // other position on the chess board for all pieces.
 
@@ -137,13 +142,13 @@ void test_rook_move() {
     }
 }
 
-int main() {
-    test_ChessBoard_Constructor();
-    test_part1_4x4_1();
-    test_pawn_move();
-    test_rook_move();
-    return EXIT_SUCCESS;
-}
+// int main() {
+//     test_ChessBoard_Constructor();
+//     test_part1_4x4_1();
+//     // test_pawn_move();
+//     // test_rook_move();
+//     return EXIT_SUCCESS;
+// }
 
 
 // #include <assert.h>

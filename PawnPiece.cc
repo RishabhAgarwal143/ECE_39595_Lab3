@@ -28,7 +28,6 @@ namespace Student
             {
                 return false;
             }
-            std::cout << "CAPTURE\n ";
         }
 
 
