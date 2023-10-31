@@ -14,6 +14,11 @@ namespace Student
     private:
         int numRows = 0;
         int numCols = 0;
+
+        ChessPiece* whiteking = nullptr;
+        ChessPiece* blackking = nullptr;
+        bool white_check = false;
+        bool black_check = false;
         Color turn = White;
         /**
          * @brief

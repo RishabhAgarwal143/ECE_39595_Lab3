@@ -18,7 +18,19 @@ namespace Student
 
     bool KingPiece::canMoveToLocation(int toRow, int toColumn)
     {
-        return false;
+        // this->piece_board->movePiece
+        if(!(this->getRow()  + 1 >= toRow and this->getRow() - 1 <= toRow))
+        {
+            return false;
+        }
+        if(!(this->getColumn()  + 1 >= toColumn and this->getColumn() - 1 <= toColumn))
+        {
+            return false;
+        }
+
+        // this->piece_board->isPieceUnderThreat(toRow,toColumn);
+        
+        return true;
     }
 
     const char *KingPiece::toString()

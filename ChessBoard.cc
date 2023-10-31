@@ -63,6 +63,16 @@ void ChessBoard::createChessPiece(Color col, Type ty, int startRow, int startCol
     else{
         ChessPiece* current_piece = new KingPiece(*this, col, startRow, startColumn);
         board.at(startRow).at(startColumn) = current_piece;
+        if(col == White){
+            // this->kingcheck = true;
+            this->whiteking = current_piece;
+            if(this->isPieceUnderThreat(startRow,startColumn)){
+                this->white_check = true;
+            }
+        }
+        else if(col == Black){
+            this->blackking = current_piece;
+        }
     }
 
     return;
@@ -80,16 +90,51 @@ bool ChessBoard::movePiece(int fromRow, int fromColumn, int toRow, int toColumn)
         {
             delete board.at(toRow).at(toColumn);
         }
+        if(board.at(fromRow).at(fromColumn)->getType() == King){
+            createChessPiece(piece->getColor(),Pawn,toRow,toColumn);
+            if(this->isPieceUnderThreat(toRow,toColumn)){
+                delete board.at(toRow).at(toColumn);
+                board.at(toRow).at(toColumn) = nullptr;
+                return false;
+            }
+            delete board.at(toRow).at(toColumn);
+            board.at(toRow).at(toColumn) = nullptr;
+        }
         board.at(toRow).at(toColumn) = piece;
         board.at(fromRow).at(fromColumn) = nullptr;
         piece->setPosition(toRow, toColumn);
-        
         if (this->turn == White)
         {
+            if(this->white_check == true){
+                if(this->isPieceUnderThreat(whiteking->getRow(),whiteking->getColumn())){
+                    board.at(fromRow).at(fromColumn) = piece;
+                    board.at(toRow).at(toColumn) = nullptr;
+                    return false;
+                }
+                this->white_check = false;
+            }
+            else{
+                if(this->isPieceUnderThreat(whiteking->getRow(),whiteking->getColumn())){
+                    this->white_check = true;
+                }
+            }
             this->turn = Black;
         }
         else
         {
+            if(this->black_check == true){
+                if(this->isPieceUnderThreat(blackking->getRow(),blackking->getColumn())){
+                    board.at(fromRow).at(fromColumn) = piece;
+                    board.at(toRow).at(toColumn) = nullptr;
+                    return false;
+                }
+                this->black_check = false;
+            }
+            else{
+                if(this->isPieceUnderThreat(blackking->getRow(),blackking->getColumn())){
+                    this->black_check = true;
+                }
+            }
             this->turn = White;
         }
 
@@ -104,7 +149,6 @@ bool ChessBoard::isValidMove(int fromRow, int fromColumn, int toRow, int toColum
     if (toRow > this->numRows || toColumn > this->numCols)
     {
         // std::cout << "is not valid 1" << std::endl;
-
         return false;
     }
     if (fromRow == toRow && fromColumn == toColumn)

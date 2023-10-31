@@ -29,9 +29,6 @@ namespace Student
                 return false;
             }
         }
-
-
-
         if (this->piece_color == White)
         {
             if (!capture) 
