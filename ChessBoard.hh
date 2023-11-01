@@ -19,6 +19,7 @@ namespace Student
         ChessPiece* blackking = nullptr;
         bool white_check = false;
         bool black_check = false;
+        // int no_of_pieces = 0;
         Color turn = White;
         /**
          * @brief
