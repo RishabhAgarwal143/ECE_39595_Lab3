@@ -169,7 +169,6 @@ bool ChessBoard::isValidMove(int fromRow, int fromColumn, int toRow, int toColum
     if (!current_piece->canMoveToLocation(toRow, toColumn))
     {
         // std::cout << "Piece valid" << std::endl;
-
         return false;
     }
 
@@ -177,13 +176,13 @@ bool ChessBoard::isValidMove(int fromRow, int fromColumn, int toRow, int toColum
     {
         if (board.at(toRow).at(toColumn)->getColor() == current_piece->getColor())
         {
-
             return false;
         }
     }
-
+    // std::cout << "is not valid    5" << std::endl;
     if (board.at(fromRow).at(fromColumn)->getType() == King)
     {
+
         ChessPiece* from_piece = board.at(fromRow).at(fromColumn);
         ChessPiece* to_piece = board.at(toRow).at(toColumn);
         board.at(toRow).at(toColumn) = nullptr;
@@ -217,7 +216,6 @@ bool ChessBoard::isValidMove(int fromRow, int fromColumn, int toRow, int toColum
                 delete board.at(toRow).at(toColumn);
                 board.at(fromRow).at(fromColumn) = from_piece;
                 board.at(toRow).at(toColumn) = to_piece;
-                // std::cout << "is not valid 5" << std::endl;
                 return false;
             }
             // this->white_check = false;
