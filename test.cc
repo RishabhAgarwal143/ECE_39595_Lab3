@@ -77,6 +77,8 @@ int main(int argc, char** argv) {
     std::cout << "INITAL BOARD: \n";
     std::cout << board.displayBoard().str();
     std::cout << board.movePiece(0,1,1,2) << std::endl;
+    std::cout << board.movePiece(0,2,2,0) << std::endl;
+    std::cout << board.movePiece(0,7,0,6) << std::endl;
     
 //     std::cout << board.movePiece(1,3,0,2) << std::endl;
 //     std::cout << board.movePiece(2,3,1,3) << std::endl;
